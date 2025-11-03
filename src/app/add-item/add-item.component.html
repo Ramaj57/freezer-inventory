@@ -1,0 +1,13 @@
+<form [formGroup]="f" (ngsubmit)="save()">
+  <label>Barcode <input formcontrolName="barcode" /></label>
+  <label>Name <input formcontrolName="name" /></label>
+  <label>Shelf Index<input formcontrolName="shelfIndex" min="0" /></label>
+  <label
+    >Side
+    <select formcontrolName="side">
+      <option value="left">Left</option>
+      <option value="right">Right</option>
+    </select></label
+  >
+  <button type="submit" [disabled]="f.invalid">Add</button>
+</form>

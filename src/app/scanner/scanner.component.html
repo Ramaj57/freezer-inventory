@@ -1,0 +1,8 @@
+<div class="scanner-container">
+    <button (click)="toggleScanner()" class="scan-button">
+        {{ isScanning ? 'Stop Scanner' : 'Start Scanner' }}
+    </button>
+    @if (scanResult()) {
+    <div class="result">Scanned Code: {{ scanResult() }}</div>
+    }
+</div>
