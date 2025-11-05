@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BarcodeScannerService } from '../barcode-scanner.service';
 
 @Component({
@@ -8,27 +8,11 @@ import { BarcodeScannerService } from '../barcode-scanner.service';
   templateUrl: './scanner.component.html',
   styleUrls: ['./scanner.component.css'],
 })
-export class ScannerComponent implements OnDestroy {
-  private readonly scannerService = inject(BarcodeScannerService);
-  protected readonly scanResult = this.scannerService.getScanResult;
-  protected isScanning = false;
+export class ScannerComponent {
+ private readonly scannerService = inject(BarcodeScannerService);
+  protected readonly scanResult = this.scannerService.getScanResult();
 
-  async toggleScanner() {
-    try {
-      if (this.isScanning) {
-        await this.scannerService.stopScanner();
-        this.isScanning = false;
-      } else {
-        await this.scannerService.startScanner();
-        this.isScanning = true;
-      }
-    } catch (error) {
-      console.error('Error toggling scanner:', error);
-      this.isScanning = false;
-    }
-  }
-
-  ngOnDestroy() {
-    this.scannerService.stopScanner();
+  async startScanner() {
+    await this.scannerService.startScanner();
   }
 }
